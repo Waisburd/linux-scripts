@@ -64,6 +64,3 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Alt>Left
 
 
 
-# Youtube desktop entry
-# google-chrome --app="https://www.youtube.com
-
