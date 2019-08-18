@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # Script for installing and configuring things after linux installation
-# It needs to run with sudo privileges
+# It requires sudo privileges
 
 # Initialize variables
 DOWNLOADS=$HOME/Downloads
 DEFAULT_APPLICATIONS_FILE=/etc/gnome/defaults.list
+BACKGROUND=/usr/share/backgrounds/pop/kate-hazen-unleash-your-robot.png
+SCREENSAVER=/usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png
 
 # Download and install google-chrome --------------------------------------------------------------
 wget --output-document=$DOWNLOADS/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -15,6 +17,9 @@ rm $DOWNLOADS/google-chrome.deb
 # Install vlc -------------------------------------------------------------------------------------
 sudo apt install vlc -y
 
+# Install vscode
+sudo apt install code -y
+
 # Configure default applications ------------------------------------------------------------------
 sudo sed -i 's/firefox.desktop/google-chrome.desktop/g' $DEFAULT_APPLICATIONS_FILE
 sudo sed -i 's/org.gnome.Totem.desktop/vlc.desktop/g' $DEFAULT_APPLICATIONS_FILE
@@ -23,8 +28,6 @@ sudo sed -i 's/org.gnome.Totem.desktop/vlc.desktop/g' $DEFAULT_APPLICATIONS_FILE
 gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Calculator.desktop']"
 
 # Set background
-BACKGROUND=/usr/share/backgrounds/pop/kate-hazen-unleash-your-robot.png
-SCREENSAVER=/usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png
 if [ -f $BACKGROUND ]; then
 	echo "Setting background image"
 	gsettings set org.gnome.desktop.background picture-uri "file://$BACKGROUND"
