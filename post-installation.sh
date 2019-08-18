@@ -20,12 +20,19 @@ sudo sed -i 's/firefox.desktop/google-chrome.desktop/g' $DEFAULT_APPLICATIONS_FI
 sudo sed -i 's/org.gnome.Totem.desktop/vlc.desktop/g' $DEFAULT_APPLICATIONS_FILE
 
 # Configure favorite applications -----------------------------------------------------------------
-gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop']"
+gsettings set org.gnome.shell favorite-apps "['google-chrome.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Calculator.desktop']"
 
 # Set background
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/pop/kate-hazen-unleash-your-robot.png'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png'
-
+BACKGROUND=/usr/share/backgrounds/pop/kate-hazen-unleash-your-robot.png
+SCREENSAVER=/usr/share/backgrounds/pop/nick-nazzaro-ice-cave.png
+if [ -f $BACKGROUND ]; then
+	echo "Setting background image"
+	gsettings set org.gnome.desktop.background picture-uri "file://$BACKGROUND"
+fi
+if [ -f $SCREENSAVER ]; then
+	echo "Setting screen-saver image"
+	gsettings set org.gnome.desktop.screensaver picture-uri "file://$SCREENSAVER"
+fi
 
 
 # Configure keyboard shortcuts --------------------------------------------------------------------
